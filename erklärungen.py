@@ -1,3 +1,9 @@
+# ### Grundaufbau Programm
+# ggf. Module importiert z.B. random, math, ...
+# Funktionen definieren
+# restliches Programm inklusive Aufruf von Funktionen
+
+
 # ### Variablen
 # string / str
 text = "string"
