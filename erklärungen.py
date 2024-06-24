@@ -29,6 +29,7 @@ text.upper()    # ändert alles auf Großbuchstaben
 text.strip()    # entfernt am Anfang und Ende das Element, welches in der Klammer steht bzw. die Leerzeichen
 text.lstrip()   # wie strip, aber nur auf der linken Seite des strings
 text.rstrip()   # wie strip, aber nur auf der rechten Seite des strings
+text.split()    # trennt den string anhand des Elements in Klammern in eine Liste auf
 
 # ### Listen-Operationen
 liste.append("Wert, welcher in die Liste soll")     # hängt einen Inhalt an eine Liste an
@@ -46,7 +47,7 @@ print(text)
 # Ausgabe einer Kombination aus String und Text
 print("Die Variable text enthält folgenden Text:", text)
 # oder
-print(f"Die Variable text enthält folgenden Text:{text}")
+print(f"Die Variable text enthält folgenden Text: {text}")
 
 # Ausgabe der Werte von Liste, Tuple und Dictionary
 # Liste
@@ -74,6 +75,13 @@ for element in liste:
 while text == "Test":
     print("text ist Test")
 
+# wird ausgeführt, solange keine fehlerfreie Eingabe vorhanden ist
+fehler = True   # Variable für Schleifenbedingung Fehler definieren
+while fehler:   # Schleife durchlaufen lassen, solange ein Fehler vorliegt
+    eingabe = input("Eingabe: ")    # Eingabe abfragen
+    if eingabe.isdigit():   # Prüfen, ob Eingabe eine Ziffer ist bzw. korrekt ist
+        fehler = False      # Wenn die Eingabe korrekt ist, Fehler auf False setzen, um die Schleife zu beenden
+
 # wird ausgeführt, bis die Schleife durch break beendet wird
 while True:
     print("Test")
@@ -84,7 +92,7 @@ if text == "Test":  # prüft, ob die Variable text Test ist
     print("Text Test")      # wird ausgeführt, wenn die Bedingung wahr ist
 elif text == "anderer_Test":    # Bedingung, die geprüft wird, wenn die andere nicht wahr ist
     print("Text anderer_Test")
-else:   # sonst, ohne Bedingung
+else:                           # sonst, ohne Bedingung
     print("Text kein Test")     # wenn keine der vorherigen Bedingungen erfüllt ist
 
 
@@ -106,3 +114,32 @@ print(funktionsname("Standardwert"))
 
 # Funktion aufrufen, mit Übergabe eines Wertes für parameter_1 und parameter_2 und Speichern der Rückgabe
 ergebnis_funktion = funktionsname("Test")
+
+# ### Try Except
+try:    # Code, der probiert wird auszuführen
+    float(ergebnis_funktion)    # z.B. Umwandlung einer Variable in einen Float
+except ValueError:      # Im Falle eines Fehlers im Try Block wird das ausgeführt
+    fehler = True
+
+# Try Except mit Schleife
+while True:     # Unendliche Schleife, die durch break verlassen wird
+    try:    # Probiert
+        eingabe = int(input("Eingabe: "))
+        if eingabe < 1 or eingabe > 10:     # Bedingung zum Fehler produzieren
+            raise ValueError    # ValueError produzieren
+        break   # Wenn alles vorher im Try funktioniert, wird das break ausgeführt und beendet die Schleife
+    except ValueError:  # wird ausgeführt, wenn im Try-Block ein Fehler auftritt
+        print("Fehler")
+
+# ### Dateien verwenden
+# mit Variable
+# Datei öffnen mit Argumenten Dateiname und Lese-/Schreibmodus
+# a = append (anhängen), w = write (überschreiben), r = read (lesen)
+datei = open("dateiname.txt", "w")  # Datei öffnen und einer Variablen zuweisen
+datei.write(ergebnis_funktion)  # Etwas in die Datei schreiben
+datei.close()   # Datei schließen
+
+# with open
+# öffnet eine Datei für den darunter eingerückten Block und gibt dieser einen Variablennamen
+with open("dateiname.txt", "a") as d:
+    d.write(f"Text: {text}\n")  # Schreibt einen Text in die Datei (\n ist ein Zeilenumbruch)
